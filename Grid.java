@@ -1,17 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
-
-/**
- * Created by qp on 2/4/17.
- */
+ 
 public class Grid {
-
-
+    
     private int x, y; // x is number of categories, y is number of items
 
     private Category[] c;
     private Matrix[] m;
-//    private ArrayList<Item[]> list;
 
     public Grid(int x, int y) {
         this.x = x;
@@ -46,7 +41,6 @@ public class Grid {
         }
         return sb.toString();
     }
-
 
     /**
      *  Test to check this class works.
