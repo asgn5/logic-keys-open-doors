@@ -1,6 +1,4 @@
-/**
- * Created by qp on 2/3/17.
- */
+
 public class Box {
 
     private boolean isClicked;
