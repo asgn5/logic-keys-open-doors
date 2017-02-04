@@ -18,27 +18,7 @@ public class Grid {
         this.y = y;
         c = new Category[x];
         m = new Matrix[x];
-
-        // JUST AN EXAMPLE, NOTE: IT WILL NOT BE LIKE THIS!!!
-        /////////////////////////////////////////////////////
-//        list = new ArrayList<>();
-//        Random r = new Random();
-//        int rand = 0;
-//        char test = '.';
-//        String test2 = "";
-//
-//        for (int i = 0; i < x; i++) {
-//            Item[] one = new Item[y];
-//            for (int j = 0; j < y; j++) {
-//                rand = r.nextInt(30)+63;
-//                test = (char) rand;
-//                test2 = Character.toString(test);
-//                one[j] = new Item(test2);
-//            }
-//            list.add(one);
-//        }
-        ////////////////////////////////////////////////////
-
+        
         init();
     }
 
