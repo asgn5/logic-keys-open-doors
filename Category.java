@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by qp on 2/3/17.
- */
 public class Category {
 
     private String name;
