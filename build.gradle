@@ -1,0 +1,9 @@
+defaultTasks 'item'
+
+task helloworld << {
+  println 'Testing with gradle'
+}
+
+task item << {
+  println 'Setting previous'
+}
