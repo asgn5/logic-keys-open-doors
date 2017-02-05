@@ -31,22 +31,12 @@ public class Category {
         }
     }
 
-
-
     public Item[] getItems() {
         return items.clone();
     }
 
-    public int getNumberOfItems() {
-        return numberOfItems;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String iName) {
-        name = iName;
     }
 
     public String toString() { return name; }
