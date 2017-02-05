@@ -1,9 +1,3 @@
-defaultTasks 'item'
+apply plugin: 'java'
 
-task helloworld << {
-  println 'Testing with gradle'
-}
-
-task item << {
-  println 'Setting previous'
-}
+sourceCompatability = 1.8
