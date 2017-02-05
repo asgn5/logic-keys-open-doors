@@ -1,11 +1,7 @@
 [![Build Status](https://travis-ci.org/asgn5/logic-keys-open-doors.svg?branch=master)](https://travis-ci.org/asgn5/logic-keys-open-doors)
 
-# logic-keys-open-doors
-## Project 2
-
-### Assignment
-Due: Feb. 13th
-
+# Project 2
+#### Assignment Details
 Now that you have played the puzzle games (at logic-puzzles.org) write the program for it.
 
 Your program will introduce one puzzle only, but your code should be written such that it can be easily extended to offer more puzzles.
