@@ -17,14 +17,14 @@ public class Grid {
     }
 
     public void init() {
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < x; i++) {
             c[i] = new Category(""+i, y);
-        for (int j = 0; j < 1; j++) {
-            for (int k = 0; k < x - 1; k++)
-                m[k] = new Matrix(y, c[0], c[k+1]);
-            for (int l = x-1; l > 1; l--) {
-                m[l] = new Matrix(y, c[l],c[l-1]);
-        }
+	    for (int j = 0; j < 1; j++) {
+		for (int k = 0; k < x - 1; k++)
+		    m[k] = new Matrix(y, c[0], c[k+1]);
+		for (int l = x-1; l > 1; l--)
+		    m[l] = new Matrix(y, c[l],c[l-1]);
+	    }
     }
 
     public String toString() {
@@ -59,9 +59,10 @@ public class Grid {
      *      { X , E } { F , E } { E , E } { R , E }
      *
      **/
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Grid g = new Grid(3,4);
         System.out.println(g.toString());
     }
-
+    
+    }
 }
