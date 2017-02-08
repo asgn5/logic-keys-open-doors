@@ -63,6 +63,5 @@ public class Grid {
         Grid g = new Grid(3,4);
         System.out.println(g.toString());
     }
-    
-    }
+
 }
