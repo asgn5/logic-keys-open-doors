@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Matrix {
 
@@ -18,15 +20,27 @@ public class Matrix {
     }
 
     public void init() {
-        for (int i = 0; i < x.length; i++)
-            for (int j = 0; j < y.length; j++)
-                boxes[i][j] = new Box(x[i],y[j]);
+        double x1 = 10;
+        double y1 = 10;
+        double size = 42;
+        double[][] co = { {x1,y1}, {x1,y1+size}, {x1,y1+(size*2)}, {x1,y1+(size*3)} };
+        double xoffset = 0;
+        double yoffset = 0;
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < y.length; j++) {
+//                for (double[] p : co ) {
+//                    boxes[i][j] = new Box(p[0] + xoffset, p[1] + yoffset, size, x[i], y[j]);
+//                    xoffset += size;
+//                }
+                boxes[i][j] = new Box(x[i],y[i]);
+            }
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(cX).append(" ").append(cY).append("\n");
+        sb.append(cY).append(" ").append(cX).append("\n");
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes[1].length; j++) {
                 sb.append(boxes[i][j]).append(" ");
@@ -37,6 +51,14 @@ public class Matrix {
                 sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public Box[][] getBoxes() {
+        return boxes;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**

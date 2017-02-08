@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Category {
@@ -12,31 +11,44 @@ public class Category {
         this.numberOfItems = numberOfItems;
         this.items = items;
     }
+
     public Category(String name, int numberOfItems) {
         this.name = name;
         this.numberOfItems = numberOfItems;
+
+        ///////////FOR TESTING PURPOSES//////////////
         items = new Item[numberOfItems];
         Random r = new Random();
         int rand = 0;
         char test = '.';
         String test2 = "";
 
-        for (int i = 0; i < numberOfItems; i++) {
+        for (int i = 0; i < numberOfItems; i++)
             for (int j = 0; j < numberOfItems; j++) {
                 rand = r.nextInt(30) + 63;
                 test = (char) rand;
                 test2 = Character.toString(test);
                 items[j] = new Item(test2);
             }
-        }
+        //////////////////////////////////////////
     }
+
+
 
     public Item[] getItems() {
         return items.clone();
     }
 
+    public int getNumberOfItems() {
+        return numberOfItems;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String iName) {
+        name = iName;
     }
 
     public String toString() { return name; }

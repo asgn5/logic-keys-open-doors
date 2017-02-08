@@ -1,0 +1,19 @@
+category:Chapter
+items:Chapter 1,Chapter 2,Chapter 3,Chapter 4
+category:Authors
+items:Horton,Ingram,Orr,Sims
+category:Subject
+items:asteroids,dinosaurs,earthquakes,volcanoes
+
+clue:The essay about asteroids will appear 2 chapters before Dr. Sim's article
+clue:Dr. Orr's article will appear 1 chapter before Dr. ingrams
+clue:The essay in chapter 4 is about earthquakes
+clue:Dr. Horton's article will appear somewhere int the book after Dr. Ingram's piece
+clue:The article about volcanoes will appear 1 chapter after Dr. Orr's article.
+
+backstory:Martin is compiling a book of scientific essays.
+backstory:Each essay will have its own chapter in the book, and each will be by a different author.
+backstory:Help Martin determine which essays will appear in each chapter.
+backstory:
+backstory:Remember, as with all grid-based logic puzzles, no option in any category will ever be used more than once.
+backstory:If you get stuck and run into problems, try the "Clear Erros" button to remove any mistakes that might be present on the grid, or the "Hint" button to see the next logical step in the puzzle.
