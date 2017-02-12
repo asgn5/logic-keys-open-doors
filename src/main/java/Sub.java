@@ -1,5 +1,5 @@
 
-public class Matrix {
+public class Sub {
 
     private Box[][] boxes;
     private int size;
