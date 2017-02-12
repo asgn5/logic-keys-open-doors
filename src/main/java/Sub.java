@@ -1,61 +1,108 @@
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import java.util.ArrayList;
+import javafx.scene.input.MouseEvent;
 
-public class Sub {
+public class Sub extends GridPane {
 
-    private Box[][] boxes;
-    private int size;
-    private Item[] x, y;
-    private Category cX, cY;
+    private ArrayList<Box> boxes;
+    private int numItems;
+    private Box[][] box;
+    private int cordX, cordY;
 
-    // size is number of items
-    public Matrix(int size, Category cX, Category cY ) {
-        this.size = size;
-        boxes = new Box[size][size];
-        y = cY.getItems();
-        x = cX.getItems();
-        this.cY = cY;
-        this.cX = cX;
-        init();
+    public Sub(int numItems, String[] itemx, String[] itemy, int cordX, int cordY) {
+        this.numItems = numItems;
+        this.cordX = cordX;
+        this.cordY = cordY;
+
+        box = new Box[numItems][numItems];
+        boxes = new ArrayList<>();
+
+        for (int i = 0; i < numItems; i++) {
+            for (int j = 0; j < numItems; j++) {
+                box[i][j] = new Box(itemx[i],itemy[j],i,j);
+                boxes.add(box[i][j]);
+            }
+        }
+
+        for (int k = 0; k < numItems * numItems; k++) {
+            Box tmp = boxes.get(k);
+            this.add(tmp, tmp.getRow(),tmp.getColumn());
+            this.getChildren().get(k).setOnMouseClicked(event);
+        }
+
     }
 
-    public void init() {
-        for (int i = 0; i < x.length; i++)
-            for (int j = 0; j < y.length; j++)
-                boxes[i][j] = new Box(x[i],y[j]);
+    public int getCordX() { return cordX; }
+
+    public int getCordY() { return cordY; }
+
+
+    public Node getRowColumn(int row, int column) {
+        Node ret = null;
+        ObservableList<Node> child = this.getChildren();
+        for (Node node : child)
+            if (getRowIndex(node) == row &&
+                    getColumnIndex(node) == column) {
+                ret = node;
+                break;
+            }
+        return ret;
     }
 
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(cX).append(" ").append(cY).append("\n");
-        for (int i = 0; i < boxes.length; i++) {
-            for (int j = 0; j < boxes[1].length; j++) {
-                sb.append(boxes[i][j]).append(" ");
-                if (j == boxes[1].length-1)
+        for (int i = 0; i < box.length; i++) {
+            for (int j = 0; j <  numItems; j++) {
+                sb.append(box[j][i]).append(" ");
+                if (j == box[1].length-1)
                     sb.append("\n");
             }
-            if (i == boxes.length-1)
+            if (i == box.length-1)
                 sb.append("\n");
         }
         return sb.toString();
     }
 
-    /**
-     * Test to check this class works.
-     *
-     *  EXPECTED OUTPUT BELOW:
-     *
-     *     One Two
-     *     { a , 1 } { b , 1 } { c , 1 } { d , 1 }
-     *     { a , 2 } { b , 2 } { c , 2 } { d , 2 }
-     *     { a , 3 } { b , 3 } { c , 3 } { d , 3 }
-     *     { a , 4 } { b , 4 } { c , 4 } { d , 4 }
-     *
-     */
+    private EventHandler<MouseEvent> event = mouseEvent -> {
+        for (int i = 0; i < 16; i++) {
+            if (mouseEvent.getSource().equals(this.getChildren().get(i))) {
+                Node node = this.getChildren().get(i);
+                Box as = (Box) node;
+                if (as.getFill().equals(Color.RED)) {
+                    for (int j = 0; j < 4; j++) {
+                        Box b = (Box) getRowColumn(j,as.getRow());
+                        Box c = (Box) getRowColumn(as.getColumn(),j);
+                        if (!(c.getFill().equals(Color.GREEN)))
+                            b.setColor(Color.RED);
+                        if (!(c.getFill().equals(Color.GREEN)))
+                            c.setColor(Color.RED);
+                    }
+                }
+                else if (as.getFill().equals(Color.GREEN)) {
+                    for (int q = 0; q < 4; q++) {
+                        Box d = (Box) getRowColumn(q,as.getRow());
+                        Box e = (Box) getRowColumn(as.getColumn(),q);
+                        if (!(d.getFill().equals(Color.GREEN)))
+                            d.removeColor();
+                        if (!(e.getFill().equals(Color.GREEN)))
+                            e.removeColor();
+                    }
+                }
+                as.nextColor();
+            }
+        }
+    };
+
     public static void main(String[] args) {
-        Item[] a = { new Item("1"),new Item("2"),new Item("3"),new Item("4")};
-        Item[] b = { new Item("a"),new Item("b"),new Item("c"),new Item("d")};
-        Matrix abc = new Matrix(4, new Category("One",4, a),new Category("Two",4, b));
-        System.out.println(abc.toString());
+        String[] a = {"A", "B", "C", "D"};
+        String[] b = {"1", "2", "3", "4"};
+        Sub s = new Sub(4, a,b, 0, 0);
+        System.out.println(s.toString());
     }
+
 
 }
