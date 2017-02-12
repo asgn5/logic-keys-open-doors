@@ -10,6 +10,4 @@ Note that, as part of the GUI,  you need to provide clues, clear errors, and hin
 
 Start with an easy puzzle with 3x4 grid.
 
-![alt text][logo]
-
-[logo]:https://github.com/asgn5/logic-keys-open-doors/blob/master/UML.svg
+![UML](https://raw.githubusercontent.com/asgn5/logic-keys-open-doors/master/UML.png)
