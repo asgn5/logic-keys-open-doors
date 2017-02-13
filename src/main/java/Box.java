@@ -7,11 +7,8 @@ import java.util.Stack;
 
 public class Box extends Rectangle {
 
-    private boolean isClicked;
     private String left, above;
-    private int row, column, numClicks;
-    private static int COUNT = 0;
-    private final Color DEFAULT = Color.WHITE;
+    private int row, column;
     private Stack<Color> colors;
     private static Map<Color, Color> addMap = new HashMap<Color,Color>();
     static {
@@ -19,29 +16,26 @@ public class Box extends Rectangle {
         addMap.put(Color.RED, Color.GREEN);
         addMap.put(Color.GREEN, Color.WHITE);
     }
-    //    public Box(double xLo, double yLo, double size, String left, String above, int x, int y) {
-//        super(xLo,yLo,size,size);
-//        this.x = x; // index in 2d array
-//        this.y = y; // ""
-//        this.above = above;
-//        this.left = left;
-//        isClicked = false;
-//    }
 
     public Box(String itemLeft, String itemAbove, int row, int column) {
-        super(42, 42);
+        super(50, 50);
         this.above = itemAbove;
         this.left = itemLeft;
         this.row = row;
         this.column = column;
-        this.setFill(DEFAULT);
+        this.setFill(Color.WHITE);
         this.setStroke(Color.BLACK);
-        isClicked = false;
+        this.setStrokeWidth(1);
         colors = new Stack<>();
-        colors.push(DEFAULT);
-        numClicks = 0;
+        colors.push(Color.WHITE);
+    }
+    public String getItemAbove() {
+        return above;
     }
 
+    public String getItemLeft() {
+        return left;
+    }
     public int getRow() {
         return row;
     }
@@ -66,11 +60,13 @@ public class Box extends Rectangle {
     public String removeColor() {
         colors.pop();
         this.setFill(colors.peek());
+        System.out.println(current());
         return current();
     }
 
-    public void setClicked() {
-        isClicked = !isClicked;
+    public void clearColor() {
+        colors = new Stack<Color>();
+        colors.push(Color.WHITE);
     }
 
     @Override
@@ -143,51 +139,5 @@ public class Box extends Rectangle {
     private static String test(String str) {
         return "\u001B[33m"+"TEST: "+ str + "\u001B[0m";
     }
-
-    //
-
-//
-
-//{   Chapter 1 | Horton      }{0,0} {   Chapter 1 | Ingram      }{0,1} {   Chapter 1 | Orr         }{0,2} {   Chapter 1 | Sims        }{0,3}
-
-//{   Chapter 2 | Horton      }{1,0} {   Chapter 2 | Ingram      }{1,1} {   Chapter 2 | Orr         }{1,2} {   Chapter 2 | Sims        }{1,3}
-
-//{   Chapter 3 | Horton      }{2,0} {   Chapter 3 | Ingram      }{2,1} {   Chapter 3 | Orr         }{2,2} {   Chapter 3 | Sims        }{2,3}
-
-//{   Chapter 4 | Horton      }{3,0} {   Chapter 4 | Ingram      }{3,1} {   Chapter 4 | Orr         }{3,2} {   Chapter 4 | Sims        }{3,3}
-
-//
-
-//
-
-//
-
-//{   Chapter 1 | asteroids   }{0,0} {   Chapter 1 | dinosaurs   }{0,1} {   Chapter 1 | earthquakes }{0,2} {   Chapter 1 | volcanoes   }{0,3}
-
-//{   Chapter 2 | asteroids   }{1,0} {   Chapter 2 | dinosaurs   }{1,1} {   Chapter 2 | earthquakes }{1,2} {   Chapter 2 | volcanoes   }{1,3}
-
-//{   Chapter 3 | asteroids   }{2,0} {   Chapter 3 | dinosaurs   }{2,1} {   Chapter 3 | earthquakes }{2,2} {   Chapter 3 | volcanoes   }{2,3}
-
-//{   Chapter 4 | asteroids   }{3,0} {   Chapter 4 | dinosaurs   }{3,1} {   Chapter 4 | earthquakes }{3,2} {   Chapter 4 | volcanoes   }{3,3}
-
-//
-
-//
-
-//
-
-//{   asteroids | Horton      }{0,0} {   asteroids | Ingram      }{0,1} {   asteroids | Orr         }{0,2} {   asteroids | Sims        }{0,3}
-
-//{   dinosaurs | Horton      }{1,0} {   dinosaurs | Ingram      }{1,1} {   dinosaurs | Orr         }{1,2} {   dinosaurs | Sims        }{1,3}
-
-//{ earthquakes | Horton      }{2,0} { earthquakes | Ingram      }{2,1} { earthquakes | Orr         }{2,2} { earthquakes | Sims        }{2,3}
-
-//{   volcanoes | Horton      }{3,0} {   volcanoes | Ingram      }{3,1} {   volcanoes | Orr         }{3,2} {   volcanoes | Sims        }{3,3}
-
-//
-//                for (double[] p : co ) {
-//                    boxes[i][j] = new Box(p[0] + xoffset, p[1] + yoffset, size, x[i], y[j]);
-//                    xoffset += size;
-//                }
 
 }

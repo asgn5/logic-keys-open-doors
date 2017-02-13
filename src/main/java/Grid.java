@@ -16,39 +16,32 @@ public class Grid {
         this.s = s;
     }
 
-//    public Box getBox(int x, int y) {
-//        return s[x].getBox(x,y);
+//    public Sub[] getSubGrids() {
+//        return s;
 //    }
 
-    public Sub[] getSubGrids() {
-        return s;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for(Sub a : s)
-            sb.append(a);
-        return sb.toString();
-    }
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        for(Sub a : s)
+//            sb.append(a);
+//        return sb.toString();
+//    }
 
     public Sub[] getS() {
         return s;
     }
 
-//    public Box[][] getBoxes(int i) {
-//        return s[i].getBoxes();
+//    public static void main(String[] args) {
+//        try {
+//            Grid g = Grid.read("puzzles");
+//            for (int i = 0; i < 3; i++) {
+//                System.out.println(g.getS()[i].toString());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //    }
-
-    public static void main(String[] args) {
-        try {
-            Grid g = Grid.read("puzzles");
-            for (int i = 0; i < 3; i++) {
-                System.out.println(g.getS()[i].toString());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//
     public static Grid read(String path) throws IOException {
 
         ArrayList<String> list = allLines(path);
