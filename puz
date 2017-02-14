@@ -1,0 +1,34 @@
+category number:3
+item number:4
+category:training
+items:6 weeks,7 weeks,8 weeks,9 weeks
+category:dogs
+items:Bailey,Cooper,Jake,Lucky
+category:trainers
+items:Martha,Odette,Rachel,Stephanie
+
+answer: 6 weeks,Bailey
+answer: 7 weeks,Jake
+answer: 8 weeks,Cooper
+answer: 9 weeks,Lucky
+answer: 6 weeks,Martha
+answer: 7 weeks,Odette
+answer: 8 weeks,Stephanie
+answer: 9 weeks,Rachel
+answer: Martha,Bailey
+answer: Odette,Jake
+answer: Rachel,Lucky
+answer: Stephanie,Cooper
+
+clue:The essay about asteroids will appear 2 chapters before Dr. Sim's article
+clue:Dr. Orr's article will appear 1 chapter before Dr. ingrams
+clue:The essay in chapter 4 is about earthquakes
+clue:Dr. Horton's article will appear somewhere int the book after Dr. Ingram's piece
+clue:The article about volcanoes will appear 1 chapter after Dr. Orr's article.
+
+backstory:Martin is compiling a book of scientific essays.
+backstory:Each essay will have its own chapter in the book, and each will be by a different author.
+backstory:Help Martin determine which essays will appear in each chapter.
+backstory:
+backstory:Remember, as with all grid-based logic puzzles, no option in any category will ever be used more than once.
+backstory:If you get stuck and run into problems, try the "Clear Erros" button to remove any mistakes that might be present on the grid, or the "Hint" button to see the next logical step in the puzzle.
