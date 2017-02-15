@@ -1,4 +1,3 @@
-/* Richard Kent */
 import javafx.scene.paint.ImagePattern;
 import java.io.File;
 import java.io.IOException;
