@@ -1,7 +1,10 @@
 import javafx.scene.paint.ImagePattern;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -36,8 +39,9 @@ public class Controller {
 
     /**
      * Creates the controller with,
-     * @param grid The Grid -- the logic-puzzle
-     * @param clues The contents of the clues
+     *
+     * @param grid      The Grid -- the logic-puzzle
+     * @param clues     The contents of the clues
      * @param backstory The contents of the backstory
      */
     public Controller(Grid grid, String[] intro, String[] clues, String[] backstory) {
@@ -78,18 +82,19 @@ public class Controller {
     /**
      * A fundamentally crucial step of automation for the puzzle.
      * Reads a file that has a specific format for cues, interprets these cues,
-     *   and then stores this information to be sorted.
-     *
+     * and then stores this information to be sorted.
+     * <p>
      * IMPORTANT: This is a large step towards scaling the puzzle to adapting larger sizes.
-     *            as well as a very simple way to generate new puzzles.
+     * as well as a very simple way to generate new puzzles.
+     *
      * @param path The path of the file to be parsed.
      * @return controller The controller with its respective components.
      * @throws IOException If the path does not exist or the file is not found.
-     * Though it may be redundant, it is necessary to emphasize that different
-     * IDEs respect various types of paths (relative or absolute) so,
-
-     * IMPORTANT: MAKE SURE THE FILE IS IN THE CORRECT LOCATION FOR YOUR IDE!
-     *            OR EDIT THE PATH TO REFLECT THE IDE's RESPECTED PATH
+     *                     Though it may be redundant, it is necessary to emphasize that different
+     *                     IDEs respect various types of paths (relative or absolute) so,
+     *                     <p>
+     *                     IMPORTANT: MAKE SURE THE FILE IS IN THE CORRECT LOCATION FOR YOUR IDE!
+     *                     OR EDIT THE PATH TO REFLECT THE IDE's RESPECTED PATH
      */
     public static Controller read(String path) throws IOException {
 
@@ -100,11 +105,12 @@ public class Controller {
         ArrayList<ListEntry> answers = new ArrayList<>();
         ArrayList<String> clues = new ArrayList<>();
         ArrayList<String> backstory = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
         int numCat = 0;
         int numItem = 0;
         for (String tmp : list) {
             if (tmp.contains("intro:")) {
-                tmp = tmp.replace("intro:","");
+                tmp = tmp.replace("intro:", "");
                 introItems.add(tmp);
             } else if (tmp.contains("category number:")) {
                 tmp = tmp.replace("category number:", "").trim();
@@ -131,30 +137,37 @@ public class Controller {
             }
 
         }
+        for (ListEntry entry : answers) {
+            map.put(entry.getKey(), entry.getValue());
+            map.put(entry.getValue(), entry.getKey());
+        }
+
+        // Initializes the SubGrids
         SubGrid[] subGrids = new SubGrid[numCat];
         for (int k = 0; k < numCat; k++) { // For number of categories
             Box[][] box = new Box[numItem][numItem]; // the 2D array representing the subgrid
             for (int num = 0; num < numItem; num++) {
                 for (int num2 = 0; num2 < numItem; num2++) {
                     ImagePattern pattern = Box.fillX;
-                    for (ListEntry e : answers) { // For every entry in answers --> checks to see if box is an answer
-                        if (k < numCat - 1) {
-                            if (vals.get(0)[num].equals(e.getKey()) && vals.get(k + 1)[num2].equals(e.getValue()))
-                                pattern = Box.fillC;
-                            box[num][num2] = new Box(vals.get(0)[num2], vals.get(k + 1)[num], num, num2, pattern);
-                        } else {
-                            if (e.getKey().equals(vals.get(k)[num2]) && e.getValue().equals(vals.get(k - 1)[num]))
-                                pattern = Box.fillC;
-                            box[num][num2] = new Box(vals.get(k)[num2], vals.get(k - 1)[num], num, num2, pattern);
-                        }
+                    if (k == 0) {
+                        if (map.get(vals.get(0)[num2]).equals(map.get(vals.get(1)[num]))) pattern = Box.fillC;
+                        box[num][num2] = new Box(vals.get(0)[num2], vals.get(1)[num], num, num2, pattern);
+                    } else if (k == 1) {
+                        if (map.get(vals.get(0)[num2]).equals(vals.get(2)[num])) pattern = Box.fillC;
+                        box[num][num2] = new Box(vals.get(0)[num2], vals.get(2)[num], num, num2, pattern);
+                    } else {
+                        if (map.get(vals.get(2)[num2]).equals(vals.get(1)[num])) pattern = Box.fillC;
+                        box[num][num2] = new Box(vals.get(2)[num2], vals.get(1)[num], num, num2, pattern);
                     }
                 }
             }
-            if (k < numCat - 1) subGrids[k] = new SubGrid(numItem, box, 0, k + 1, keys.get(0), keys.get(k + 1));
-            else subGrids[k] = new SubGrid(numItem, box, k, k - 1, keys.get(k), keys.get(k - 1));
+            if (k == 0) subGrids[k] = new SubGrid(numItem, box, 0, 1, keys.get(0), keys.get(1));
+            else if (k == 1) subGrids[k] = new SubGrid(numItem, box, 0, 2, keys.get(0), keys.get(2));
+            else subGrids[k] = new SubGrid(numItem, box, 2, 1, keys.get(1), keys.get(2));
         }
+
         String[] intro = introItems.toArray(new String[introItems.size()]);
-                String[] cats = keys.toArray(new String[keys.size()]);
+        String[] cats = keys.toArray(new String[keys.size()]);
         String[] cluesCopy = clues.toArray(new String[clues.size()]);
         String[] backStoryCopy = backstory.toArray(new String[backstory.size()]);
 
@@ -164,6 +177,7 @@ public class Controller {
     /**
      * Helper function that adds every line of the file into an ArrayList
      * that is then assigned in the method above
+     *
      * @param path The path to the file.
      * @return list The arraylist with each line representing an index in the list.
      * @throws IOException If the file is not found
@@ -187,10 +201,14 @@ public class Controller {
      */
     private static class ListEntry {
 
-        /** Reference for the key. */
+        /**
+         * Reference for the key.
+         */
         private String key;
 
-        /** Reference for the value */
+        /**
+         * Reference for the value
+         */
         private String val;
 
         /**
@@ -202,12 +220,16 @@ public class Controller {
             this.val = val;
         }
 
-        /** @return The key */
+        /**
+         * @return The key
+         */
         public String getKey() {
             return key;
         }
 
-        /** @return the value */
+        /**
+         * @return the value
+         */
         public String getValue() {
             return val;
         }
@@ -229,31 +251,3 @@ public class Controller {
     }
 
 }
-//        for (int j = 0; j < 1; j++)
-//            for (int k = 0; k < numCat - 1; k++) {
-//                Box[][] box = new Box[numItem][numItem];
-//                for (int num = 0; num < vals.get(0).length; num++)
-//                    for (int num2 = 0; num2 < vals.get(k + 1).length; num2++) {
-//                        ImagePattern pattern = Box.fillX;
-//                        for (ListEntry e : answers) {
-//                            if (vals.get(0)[num].equals(e.getKey()) && vals.get(k + 1)[num2].equals(e.getValue()))
-//                                pattern = Box.fillC;
-//                            box[num][num2] = new Box(vals.get(0)[num], vals.get(k + 1)[num2], num, num2, pattern);
-//                        }
-//                    }
-//                subGrids[k] = new SubGrid(numItem, box, 0, k + 1, keys.get(0), keys.get(k+1));
-//            }
-//        for (int l = numCat - 1; l > 1; l--) {
-//            Box[][] box = new Box[numItem][numItem];
-//            for (int num = 0; num < vals.get(l).length; num++)
-//                for (int num2 = 0; num2 < vals.get(l - 1).length; num2++) {
-//                    ImagePattern pattern = Box.fillX;
-//                    for (ListEntry e : answers)
-//                        if (e.getKey().equals(vals.get(l)[num2]) && e.getValue().equals(vals.get(l - 1)[num])) {
-//                            pattern = Box.fillC;
-//                            break;
-//                        }
-//                    box[num][num2] = new Box(vals.get(l)[num], vals.get(l-1)[num2], num, num2, pattern);
-//                }
-//            subGrids[l] = new SubGrid(numItem, box, l, l - 1, keys.get(l), keys.get(l-1));
-//        }

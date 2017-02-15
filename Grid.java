@@ -48,7 +48,7 @@ public class Grid extends GridPane {
         this.s = s;
 
         for (SubGrid subGrid : s)
-            this.add(subGrid, subGrid.getCordY()+1, subGrid.getCordX()+1);
+            this.add(subGrid, subGrid.getCordY(), subGrid.getCordX());
     }
 
     /**

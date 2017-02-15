@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -114,7 +113,6 @@ public class View extends Application {
         example.setFill(new ImagePattern(new Image("file:example.gif")));
         inner.setMaxWidth(400);
         inner.setVgap(40);
-//        inner.setTranslateY(200);
         Text text = new Text("What is a Logic Puzzle?");
         text.setFont(Font.font(20));
         text.setFontSmoothingType(FontSmoothingType.LCD);
@@ -149,11 +147,7 @@ public class View extends Application {
         GridPane gp = drawLabels();
         GridPane clueAndBackground = getCluesAndBackground();
         StackPane root = new StackPane(gp, g);
-//        gp.setAlignment(Pos.CENTER);
         g.setAlignment(Pos.CENTER);
-//        root.setAlignment(Pos.CENTER);
-//        g.setAlignment(Pos.CENTER);
-//        gp.setAlignment(Pos.CENTER);
         gp.setTranslateX(-61);
         gp.setTranslateY(-61);
         GridPane buttons = getButtons();
@@ -222,11 +216,8 @@ public class View extends Application {
                 panes[j].setMaxSize(30, 120);
                 gp.add(panes[j], (j % 8) + 1, 0);
             }
-//            text.setFont(Font.font(9));
-
-            text.setFont(Font.font(null,FontWeight.BOLD,9));
+            text.setFont(Font.font(null,FontWeight.BOLD,8));
         }
-//        gp.setAlignment(Pos.CENTER);
         gp.setHgap(0);
         gp.setMaxSize(360,360);
         return gp;
@@ -316,40 +307,3 @@ public class View extends Application {
     };
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//        for (int j = 0; j < numItems * 2; j++) {
-//            r[j] = new Rectangle(120, 30);
-//            r[j].setFill(Color.WHITE);
-//            r[j].setStroke(Color.BLACK);
-//            Label text;
-//            if (j / 4 < 1) text = new Label(g.getS()[0].getBoxItemLeft(j % 4, 0));
-//            else text = new Label(g.getS()[2].getBoxItemLeft(j % 4, 0));
-//            text.setFont(Font.font(9));
-//            panes[j] = new StackPane(r[j], text);
-//            panes[j].setMaxSize(120, 30);
-//            gp.add(panes[j], 0, j + 1);
-//        }
-//        for (int k = numItems * 2; k < numItems * numItems; k++) {
-//            r[k] = new Rectangle(30, 120);
-//            r[k].setFill(Color.WHITE);
-//            r[k].setStroke(Color.BLACK);
-//            Label text;
-//            if (k / 12 < 1) text = new Label(g.getS()[0].getBoxItemAbove(0, k % 4));
-//            else text = new Label(g.getS()[1].getBoxItemAbove(0, k % 4));
-//            text.setRotate(270);
-//            text.setFont(Font.font(9));
-//            panes[k] = new StackPane(r[k], text);
-//            panes[k].setMaxSize(30, 120);
-
-//        }
