@@ -21,6 +21,8 @@ public class SubGrid extends GridPane {
         for (int i = 0; i < numItems; i++)
             for (int j = 0; j < numItems; j++) {
                 box[i][j].setOnMouseClicked(event);
+//                System.out.println(box[i][j].getRow() + " " + box[i][j].getColumn());
+                System.out.println(cordX + " " + cordY);
                 this.add(box[i][j],box[i][j].getRow(),box[i][j].getColumn());
             }
     }
@@ -62,17 +64,18 @@ public class SubGrid extends GridPane {
                 box[i][j].clearImage();
     }
 
-    private boolean checkCircle(int boxRow, int boxColumn) {
+    private boolean checkCircle(int boxRow, int boxColumn/**/) {
         for (int i = 0; i < numItems; i++) {
-            if (box[boxRow][i].getFill().equals(Box.fillC) || box[i][boxColumn].getFill().equals(Box.fillC))
+            if (box[boxRow][i].getFill().equals(Box.fillC) || box[i][boxColumn].getFill().equals(Box.fillC)) {
                 return true;
+            }
         }
         return false;
     }
 
     private EventHandler<MouseEvent> event = mouseEvent -> {
         Box as = (Box) mouseEvent.getSource();
-//        System.out.println("BOX: Left " + as.getItemLeft() + " Above " + as.getItemAbove());
+        System.out.println("BOX: Left " + as.getItemLeft() + " Above " + as.getItemAbove());
         if (as.getFill().equals(Box.fillW))
             as.nextImage();
         else if (as.getFill().equals(Box.fillX)) {
